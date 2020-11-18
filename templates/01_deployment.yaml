@@ -1,0 +1,22 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-dep
+  labels:
+    app: chetantest
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: chetantest
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata: 
+      name: {{ .Chart.Name }}-deppod
+      labels:
+        app: chetantest
+    spec:
+      containers:
+      - name: {{ .Chart.Name }} 
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
